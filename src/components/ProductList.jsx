@@ -1,17 +1,16 @@
-import React, { useContext, useState, useMemo } from 'react';
+    import { useProducts } from '../hooks/useProducts';         import React, { useState, useMemo } from 'react';
 import { Row, Col, Spinner, Alert } from 'react-bootstrap';
-import { ProductContext } from '../context/ProductContext';
+import { useProducts } from '../hooks/useProducts';
 import ProductCard from './ProductCard';
 import EditProductModal from './EditProductModal';
 import SearchBar from './SearchBar';
 
 const ProductList = () => {
-  const { state } = useContext(ProductContext);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filterStock, setFilterStock] = useState(false);
+  const { state, searchTerm, setSearchTerm, filterStock, setFilterStock } = useProducts();
   const [editingProduct, setEditingProduct] = useState(null);
 
   const filteredProducts = useMemo(() => {
+    if (!state?.products) return [];
     return state.products.filter(product => {
       const matchName = product.name.toLowerCase().includes(searchTerm.toLowerCase());
       const matchStock = filterStock ? product.inStock : true;
@@ -51,7 +50,8 @@ const ProductList = () => {
       {editingProduct && (
         <EditProductModal
           product={editingProduct}
-          onClose={() => setEditingProduct(null)}
+          show={!!editingProduct}
+          handleClose={() => setEditingProduct(null)}
         />
       )}
     </div>
@@ -59,3 +59,10 @@ const ProductList = () => {
 };
 
 export default ProductList;
+{editingProduct && (
+  <EditProductModal
+    product={editingProduct}
+    show={Boolean(editingProduct)}
+    handleClose={() => setEditingProduct(null)}
+  />
+)}
