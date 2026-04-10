@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/react-smart-dashboard/static/css/main.b344d86d.css",
+    "main.js": "/react-smart-dashboard/static/js/main.8f29be56.js",
+    "index.html": "/react-smart-dashboard/index.html",
+    "main.b344d86d.css.map": "/react-smart-dashboard/static/css/main.b344d86d.css.map",
+    "main.8f29be56.js.map": "/react-smart-dashboard/static/js/main.8f29be56.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b344d86d.css",
+    "static/js/main.8f29be56.js"
+  ]
+}
