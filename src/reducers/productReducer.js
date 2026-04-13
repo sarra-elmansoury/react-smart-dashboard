@@ -1,6 +1,8 @@
 export const initialState = {
   products: [],
   loading: true,
+  searchQuery: '',
+  filterStock: 'all'
 };
 
 export const productReducer = (state, action) => {
@@ -15,6 +17,10 @@ export const productReducer = (state, action) => {
       return { ...state, products: state.products.map(p => p.id === action.payload.id ? action.payload : p) };
     case 'TOGGLE_STOCK':
       return { ...state, products: state.products.map(p => p.id === action.payload ? { ...p, inStock: !p.inStock } : p) };
+    case 'SET_SEARCH':
+      return { ...state, searchQuery: action.payload };
+    case 'SET_FILTER':
+      return { ...state, filterStock: action.payload };
     default:
       return state;
   }

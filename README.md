@@ -27,6 +27,9 @@ A comprehensive React-based dashboard for managing products, users, and inventor
 - Context API
 - LocalStorage API
 
+npm install react-bootstrap bootstrap
 cd my-app
 npm start
-![Dashboard Preview](./public/images/p2%20(2).jpeg)
+
+![Dashboard Preview](public/images/pp.jpeg)
+

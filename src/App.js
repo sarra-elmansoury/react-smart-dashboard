@@ -1,25 +1,26 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import { ProductProvider } from './context/ProductContext';
 import Navbar from './components/Navbar';
 import AddProductForm from './components/AddProductForm';
 import ProductList from './components/ProductList';
+import SearchBar from './components/SearchBar';
 
 function App() {
   return (
-    <ProductProvider>
+    <div className="min-vh-100">
       <Navbar />
       <Container>
-        <Row>
-          <Col lg={4} md={12} className="mb-4">
+        <SearchBar />
+        <Row className="g-4">
+          <Col lg={4}>
             <AddProductForm />
           </Col>
-          <Col lg={8} md={12}>
+          <Col lg={8}>
             <ProductList />
           </Col>
         </Row>
       </Container>
-    </ProductProvider>
+    </div>
   );
 }
 

@@ -3,45 +3,30 @@ import { productReducer, initialState } from '../reducers/productReducer';
 
 export const useProducts = () => {
   const [state, dispatch] = useReducer(productReducer, initialState, (initial) => {
-    const saved = localStorage.getItem('products');
+    const saved = localStorage.getItem('inventory_data');
     return saved ? { ...initial, products: JSON.parse(saved), loading: false } : initial;
   });
 
   useEffect(() => {
     if (state.products.length === 0 && state.loading) {
       const initialData = [
-        { id: 1, name: 'MacBook Pro M3', price: 1999, inStock: true, image: 'images/laptop.jpg' },
-        { id: 2, name: 'iPhone 15 Pro', price: 1099, inStock: true, image: 'images/phone.jpg' },
-        { id: 3, name: 'Sony Headphones', price: 349, inStock: false, image: 'images/headphones.jpg' },
-        { id: 4, name: 'Apple Watch Series 9', price: 399, inStock: true, image: 'images/watch.jpg' },
-        { id: 5, name: 'Logitech G Pro Mouse', price: 129, inStock: true, image: 'images/mouse.jpg' },
-        { id: 6, name: 'JBL Flip 6 Speaker', price: 119, inStock: true, image: 'images/speaker.jpg' }
+        { id: 1, name: 'System Unit', price: 1200, inStock: true },
+        { id: 2, name: 'Monitor 4K', price: 400, inStock: true },
+        { id: 3, name: 'Mechanical Keyboard', price: 150, inStock: false }
       ];
-      dispatch({ type: 'SET_PRODUCTS', payload: initialData });
+      dispatch({ type: 'LOAD_DATA', payload: initialData });
     }
   }, [state.products.length, state.loading]);
 
   useEffect(() => {
-    localStorage.setItem('products', JSON.stringify(state.products));
-  }, [state.products]);
-
-  const addProduct = useCallback((product) => {
-    dispatch({ type: 'ADD_PRODUCT', payload: product });
-  }, []);
+    if (!state.loading) {
+      localStorage.setItem('inventory_data', JSON.stringify(state.products));
+    }
+  }, [state.products, state.loading]);
 
   const deleteProduct = useCallback((id) => {
     dispatch({ type: 'DELETE_PRODUCT', payload: id });
   }, []);
 
-  const toggleStock = useCallback((id) => {
-    dispatch({ type: 'TOGGLE_STOCK', payload: id });
-  }, []);
-
-  return {
-    ...state,
-    addProduct,
-    deleteProduct,
-    toggleStock,
-    dispatch
-  };
+  return { state, dispatch, deleteProduct };
 };

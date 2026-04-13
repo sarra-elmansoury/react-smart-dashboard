@@ -1,37 +1,39 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { Form, Row, Col } from 'react-bootstrap';
+import { ProductContext } from '../context/ProductContext';
 
-const SearchBar = ({ searchTerm, setSearchTerm, filterStock, setFilterStock }) => {
-  const inputRef = useRef(null);
+const SearchBar = () => {
+  const { state, dispatch, darkMode } = useContext(ProductContext);
+  const searchRef = useRef(null);
 
   useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
+    searchRef.current.focus();
   }, []);
 
   return (
-    <Form className="mb-4">
-      <Row className="g-3">
-        <Col md={8}>
-          <Form.Control
-            type="text"
-            placeholder="Search by product name..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            ref={inputRef}
-          />
-        </Col>
-        <Col md={4} className="d-flex align-items-center">
-          <Form.Check
-            type="checkbox"
-            label="In Stock Only"
-            checked={filterStock}
-            onChange={(e) => setFilterStock(e.target.checked)}
-          />
-        </Col>
-      </Row>
-    </Form>
+    <Row className="mb-4">
+      <Col md={8}>
+        <Form.Control
+          ref={searchRef}
+          type="text"
+          placeholder="Search products..."
+          value={state.searchQuery}
+          onChange={(e) => dispatch({ type: 'SET_SEARCH', payload: e.target.value })}
+          className={darkMode ? 'bg-dark text-white' : ''}
+        />
+      </Col>
+      <Col md={4}>
+        <Form.Select
+          value={state.filterStock}
+          onChange={(e) => dispatch({ type: 'SET_FILTER', payload: e.target.value })}
+          className={darkMode ? 'bg-dark text-white' : ''}
+        >
+          <option value="all">All Products</option>
+          <option value="inStock">In Stock</option>
+          <option value="outOfStock">Out of Stock</option>
+        </Form.Select>
+      </Col>
+    </Row>
   );
 };
 
