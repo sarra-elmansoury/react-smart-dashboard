@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/react-smart-dashboard/static/css/main.b344d86d.css",
-    "main.js": "/react-smart-dashboard/static/js/main.8f29be56.js",
+    "main.js": "/react-smart-dashboard/static/js/main.b68eed9a.js",
     "index.html": "/react-smart-dashboard/index.html",
     "main.b344d86d.css.map": "/react-smart-dashboard/static/css/main.b344d86d.css.map",
-    "main.8f29be56.js.map": "/react-smart-dashboard/static/js/main.8f29be56.js.map"
+    "main.b68eed9a.js.map": "/react-smart-dashboard/static/js/main.b68eed9a.js.map"
   },
   "entrypoints": [
     "static/css/main.b344d86d.css",
-    "static/js/main.8f29be56.js"
+    "static/js/main.b68eed9a.js"
   ]
 }
